@@ -2,11 +2,20 @@ import pandas as pd
 import numpy as np
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import render
 from django.core.files.storage import default_storage
 import os
 
 # Global variable to store the uploaded dataset temporarily
 dataset_store = {}
+
+
+from django.shortcuts import render
+
+def index(request):
+    return render(request, "index.html")  # Ensure "index.html" exists in templates folder
+
+
 
 @csrf_exempt
 def upload_file(request):
@@ -124,3 +133,13 @@ def data_integrity(request):
     }
 
     return JsonResponse(integrity_stats)
+
+
+def visualization(request):
+    df = get_dataset()
+    if df is None:
+        return render(request, 'error.html', {"message": "No dataset uploaded."})
+
+    return render(request, 'index.html', {"columns": df.columns.tolist()})
+
+

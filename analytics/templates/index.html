@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dataset Analyzer</title>
+    {% comment %} <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <script src="{% static 'js/script.js' %}"></script>     {% endcomment %}
+
+    {% comment %} {% load static %}
+    <link rel="stylesheet" href="{% static 'analytics/static/css/styles.css' %}">
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'analytics/css/styles.css' %}"> {% endcomment %}
+
+
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <script src="{% static 'js/script.js' %}"></script>
+
+
+
+</head>
+<body>
+    <div class="container">
+        <h1>Dataset Analyzer</h1>
+
+        <h3>Upload Dataset</h3>
+        <input type="file" id="fileInput">
+        <button onclick="uploadFile()">Upload</button>
+        <p id="uploadMessage"></p>
+
+        <h3>Analysis Options</h3>
+        <button onclick="fetchData('overview')">Dataset Overview</button>
+        <button onclick="fetchData('basic-stats')">Basic Statistics</button>
+        <button onclick="fetchData('numerical-analysis')">Numerical Analysis</button>
+        <button onclick="fetchData('categorical-analysis')">Categorical Analysis</button>
+        <button onclick="fetchData('correlation-analysis')">Correlation Analysis</button>
+        <button onclick="fetchData('data-integrity')">Data Integrity</button>
+
+        <h3>Results</h3>
+        <div id="results"></div>
+    </div>
+
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>
