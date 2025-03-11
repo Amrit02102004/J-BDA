@@ -142,4 +142,27 @@ def visualization(request):
 
     return render(request, 'index.html', {"columns": df.columns.tolist()})
 
+import pandas as pd
+from django.http import JsonResponse
 
+def compute_correlations():
+    # Dummy data for testing (Replace this with your actual dataset)
+    data = {
+        "soil_moisture": [10, 20, 30, 40, 50],
+        "N": [5, 15, 25, 35, 45],
+        "P": [2, 12, 22, 32, 42],
+        "K": [8, 18, 28, 38, 48],
+        "soil_pH": [6.5, 7.0, 6.8, 7.2, 7.1]
+    }
+
+    df = pd.DataFrame(data)  # Convert to Pandas DataFrame
+
+    correlation_matrix = df.corr()  # Compute correlation matrix
+    return correlation_matrix
+
+def correlation_analysis(request):
+    try:
+        correlation_matrix = compute_correlations()  # Now it's defined!
+        return JsonResponse(correlation_matrix.to_dict(), safe=False)
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)
